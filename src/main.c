@@ -64,18 +64,18 @@ int main(int argc, char** argv)
 	H3_Object_AddComponent(player, SPRITECOMPONENT_CREATE("assets/Playerglock.png", 0x22));
 	H3_Object_SetRenderOrder(player, 1);
 	H3_Object_Translate(player, 0, 0);
-	H3_Object_EnablePhysics(player, H3_BOX_COLLIDER(CDT_Dynamic, 32, 32, 0x22, false));
+	//H3_Object_EnablePhysics(player, H3_BOX_COLLIDER(CDT_Dynamic, 32, 32, 0x22, false));
 	H3_Object_AddComponent(player, PLAYERCOMPONENT_CREATE(scene));
 	H3_Object_GetComponent(player, playerid);
 
-	H3_Object_AddComponent(cameraroot, CAMERACOMPONENT_CREATE(playerx, playery));
+	
 
 	H3Handle accueil_map = H3_Map_Load("assets/maptest.tmx"); // une sorte d'accès à ta map (n'est pas la map dans la scène, la charge uniquement)
 	H3Handle map1 = H3_Object_Create(scene, "map1", NULL); //Crée la map dans la scène -> différent d'en haut qui load uniquement (celle ci va permettre de la place dans la scène)
 	H3_Object_AddComponent(map1, MAPLAYERCOMPONENT_CREATE(accueil_map, "background")); //Comme pour les collisions, sauf qu'ici tu appelles un composant pour afficher ton layer décoratif (fond et sol du jeu)
 	H3_Map_RegisterObjectLayerForPhysicsInScene(scene, accueil_map, "collisions"); //dans ta map Tiled tu as des layers, dont un qui doit s'appeler collisions (celui que tu appelles du coup)
 
-
+	H3_Object_AddComponent(cameraroot, CAMERACOMPONENT_CREATE(playerx, playery));
 
 	while (H3_DoFrame(h3, scene)) {
 
@@ -108,7 +108,7 @@ int main(int argc, char** argv)
 				//H3_Object_AddComponent(bullet, BULLETCOMPONENT_CREATE());
 				H3_Object_AddVelocity(bullet, dx, dy);
 				H3_Object_GetVelocity(bullet, &bx, &by);
-				H3_Object_SetVelocity(bullet, bx*0.90, by*0.90);
+				H3_Object_SetVelocity(bullet, bx, by);
 				ammo -= 1;
 			}
 			else {
