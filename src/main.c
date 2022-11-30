@@ -64,10 +64,11 @@ int main(int argc, char** argv)
 	H3_Object_AddComponent(player, SPRITECOMPONENT_CREATE("assets/Playerglock.png", 0x22));
 	H3_Object_SetRenderOrder(player, 1);
 	H3_Object_Translate(player, 0, 0);
-	H3_Object_AddComponent(cameraroot, CAMERACOMPONENT_CREATE(playerx, playery));
 	H3_Object_EnablePhysics(player, H3_BOX_COLLIDER(CDT_Dynamic, 32, 32, 0x22, false));
 	H3_Object_AddComponent(player, PLAYERCOMPONENT_CREATE(scene));
 	H3_Object_GetComponent(player, playerid);
+
+	H3_Object_AddComponent(cameraroot, CAMERACOMPONENT_CREATE(playerx, playery));
 
 	H3Handle accueil_map = H3_Map_Load("assets/maptest.tmx"); // une sorte d'accès à ta map (n'est pas la map dans la scène, la charge uniquement)
 	H3Handle map1 = H3_Object_Create(scene, "map1", NULL); //Crée la map dans la scène -> différent d'en haut qui load uniquement (celle ci va permettre de la place dans la scène)
